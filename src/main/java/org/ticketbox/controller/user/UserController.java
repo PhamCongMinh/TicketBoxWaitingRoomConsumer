@@ -1,12 +1,12 @@
 package org.ticketbox.controller.user;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.ticketbox.database.model.User;
 import org.ticketbox.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.ticketbox.shared.base.BaseResponse;
+import org.ticketbox.shared.constant.ErrorCode;
+import org.ticketbox.shared.exception.custom.BadRequestException;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +19,10 @@ public class UserController {
 
     @GetMapping
     public BaseResponse<List<User>> getAll() {
+//        Example throw custom exception
+//        if (true) throw new BadRequestException(ErrorCode.INVALID_USER.getCode());
+
+//        Example get currentUser in authentication
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        User currentUser = (User) authentication.getPrincipal();
 //        System.out.println(currentUser);
