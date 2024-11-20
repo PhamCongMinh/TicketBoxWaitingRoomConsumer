@@ -12,11 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "ticket_types")
-public class TicketType {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+public class TicketType extends BaseModel {
     private String name;
 
     private String price;
@@ -25,15 +21,15 @@ public class TicketType {
 
     private String amount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="event_id")
     private Event event;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "ticketType")
     private List<Ticket> tickets;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "ticketType")
     private List<HeldTicket> heldTickets;
 }

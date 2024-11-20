@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "payment_transactions")
-public class PaymentTransaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class PaymentTransaction extends BaseModel {
+   @Column(nullable = true)
+    private String amount;
 }

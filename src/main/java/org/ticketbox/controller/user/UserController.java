@@ -1,5 +1,7 @@
 package org.ticketbox.controller.user;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.ticketbox.database.model.User;
 import org.ticketbox.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,15 @@ public class UserController {
 
     @GetMapping
     public List<User> getAll() {
-        return userService.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User currentUser = (User) authentication.getPrincipal();
+        System.out.println(currentUser);
+
+        List<User> users = userService.findAll();
+        System.out.println(users);
+
+        return users;
     }
 
     @GetMapping("/{id}")

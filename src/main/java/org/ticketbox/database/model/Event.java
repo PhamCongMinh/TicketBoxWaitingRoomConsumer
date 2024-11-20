@@ -13,11 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "events")
-public class Event {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+public class Event extends BaseModel {
     private String name;
 
     private String description;
@@ -30,11 +26,11 @@ public class Event {
 
     private String backgroundImageUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="organizer_id")
     private Organizer organizer;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name="event")
     private List<TicketType> ticketTypes;
 }

@@ -12,18 +12,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="organizers")
-public class Organizer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+public class Organizer extends BaseModel {
     private String name;
 
     private String description;
 
-    @OneToMany(mappedBy = "organizer")
+    @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER)
     private List<OrganizerRole> organizerRoles;
 
-    @OneToMany(mappedBy = "organizer")
+    @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER)
     private List<Event> events;
 }
