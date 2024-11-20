@@ -6,6 +6,7 @@ import org.ticketbox.database.model.User;
 import org.ticketbox.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.ticketbox.shared.base.BaseResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,35 +18,31 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAll() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        User currentUser = (User) authentication.getPrincipal();
-        System.out.println(currentUser);
-
-        List<User> users = userService.findAll();
-        System.out.println(users);
-
-        return users;
+    public BaseResponse<List<User>> getAll() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User currentUser = (User) authentication.getPrincipal();
+//        System.out.println(currentUser);
+        return new BaseResponse<List<User>>(userService.findAll());
     }
 
     @GetMapping("/{id}")
-    public Optional<User> findById(@PathVariable Integer id) {
-        return userService.findById(id);
+    public BaseResponse<Optional<User>> findById(@PathVariable Integer id) {
+        return new BaseResponse<Optional<User>>(userService.findById(id));
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.save(user);
+    public BaseResponse<User> create(@RequestBody User user) {
+        return new BaseResponse<User>(userService.save(user));
     }
 
     @PutMapping
-    public User update(@RequestBody User user) {
-        return userService.save(user);
+    public BaseResponse<User> update(@RequestBody User user) {
+        return new BaseResponse<User>(userService.save(user));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id) {
+    public BaseResponse<String> deleteById(@PathVariable Integer id) {
         userService.deleteById(id);
+        return new BaseResponse<String>("Oke");
     }
 }

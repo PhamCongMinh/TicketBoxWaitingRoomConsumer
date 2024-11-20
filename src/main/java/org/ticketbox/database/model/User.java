@@ -17,7 +17,7 @@ import org.ticketbox.database.model.BaseModel;
 
 @Data
 @Builder
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

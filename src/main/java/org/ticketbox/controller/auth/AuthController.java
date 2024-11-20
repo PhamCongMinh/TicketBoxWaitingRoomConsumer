@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ticketbox.database.model.User;
 import org.ticketbox.service.auth.AuthService;
+import org.ticketbox.shared.base.BaseResponse;
 import org.ticketbox.shared.dto.auth.LoginUserDto;
 import org.ticketbox.shared.dto.auth.RegisterUserDto;
 
@@ -17,12 +18,12 @@ public class AuthController {
     public AuthService authService;
 
     @PostMapping("/register")
-    public User register(@RequestBody RegisterUserDto dto) {
-        return authService.register(dto);
+    public BaseResponse<User> register(@RequestBody RegisterUserDto dto) {
+        return new BaseResponse<User>(authService.register(dto));
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginUserDto dto) {
-        return authService.login(dto);
+    public BaseResponse<String> login(@RequestBody LoginUserDto dto) {
+        return new BaseResponse<String>(authService.login(dto));
     }
 }
