@@ -5,7 +5,7 @@ import org.ticketbox.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.ticketbox.shared.base.BaseResponse;
-import org.ticketbox.shared.constant.ErrorCode;
+import org.ticketbox.shared.constant.ErrorCodeConstant;
 import org.ticketbox.shared.exception.custom.BadRequestException;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class UserController {
     @GetMapping
     public BaseResponse<List<User>> getAll() {
 //        Example throw custom exception
-//        if (true) throw new BadRequestException(ErrorCode.INVALID_USER.getCode());
+        if (true) throw new BadRequestException(ErrorCodeConstant.INVALID_USER);
 
 //        Example get currentUser in authentication
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
