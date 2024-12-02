@@ -11,10 +11,7 @@ public class TicketBoxApplication {
 
     @RequestMapping("/")
     String home() {
-        String testEnv = System.getenv("TEST_ENV");
-        System.out.println("TEST_ENV: " + testEnv);
-
-        return "Test Api";
+        return "OKE";
     }
 
     public static void main(String[] args) {
