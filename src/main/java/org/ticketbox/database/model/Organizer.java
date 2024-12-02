@@ -19,8 +19,7 @@ public class Organizer extends BaseModel {
 
     private String description;
 
-    @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER)
-    private List<OrganizerRole> organizerRoles;
+    private String backgroundImageUrl;
 
     @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER)
     private List<Event> events;

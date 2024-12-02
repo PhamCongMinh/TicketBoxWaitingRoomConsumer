@@ -18,15 +18,17 @@ import java.util.List;
 public class Event extends BaseModel {
     private String name;
 
-    private String description;
-
-    private String location;
+    private String backgroundImageUrl;
 
     private Date startTime;
 
     private Date endTime;
 
-    private String backgroundImageUrl;
+    private String location;
+
+    private String description;
+
+    private String status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="organizer_id")

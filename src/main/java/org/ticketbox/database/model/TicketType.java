@@ -26,12 +26,4 @@ public class TicketType extends BaseModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="event_id")
     private Event event;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ticketType")
-    private List<Ticket> tickets;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ticketType")
-    private List<HeldTicket> heldTickets;
 }
