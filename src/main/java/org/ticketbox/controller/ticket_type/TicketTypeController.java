@@ -28,7 +28,7 @@ public class TicketTypeController {
     }
 
     @GetMapping("/{id}")
-    public BaseResponse<TicketType> editEvent(@PathVariable Integer id) {
+    public BaseResponse<TicketType> getTicketTypesById(@PathVariable Integer id) {
         return new BaseResponse<TicketType>(ticketTypeService.getTicketTypeById(id));
     }
 
