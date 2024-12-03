@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "TicketTypeSummary",
+  "namespace": "com.example.kafka",
+  "fields": [
+    { "name": "id", "type": "int" },
+    { "name": "eventId", "type": "int" },
+    { "name": "amount", "type": "string" }
+  ]
+}
