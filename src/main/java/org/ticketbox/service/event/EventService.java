@@ -1,6 +1,7 @@
 package org.ticketbox.service.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.ticketbox.database.model.Event;
 import org.ticketbox.database.repository.EventRepository;
