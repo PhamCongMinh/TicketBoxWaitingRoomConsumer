@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -24,6 +22,6 @@ public class TicketType extends BaseModel {
     private String amount;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="event_id")
+    @JoinColumn(name = "event_id")
     private Event event;
 }

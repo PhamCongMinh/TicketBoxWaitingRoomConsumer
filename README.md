@@ -24,3 +24,9 @@ java -jar TicketBox-0.0.1-SNAPSHOT.jar
 ```
 
 ## Project Structure <hr>
+
+## Other command:
+Generate Avro classes:
+```bash
+mvn clean generate-sources
+```

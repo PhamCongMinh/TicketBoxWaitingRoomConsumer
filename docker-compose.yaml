@@ -54,6 +54,20 @@ services:
       - zoo1
       - kafka1
 
+#  kafka-schema-registry:
+#    image: confluentinc/cp-schema-registry:7.3.2
+#    hostname: kafka-schema-registry
+#    container_name: kafka-schema-registry
+#    depends_on:
+#      - zoo1
+#      - kafka1
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      SCHEMA_REGISTRY_HOST_NAME: kafka-schema-registry
+#      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'PLAINTEXT://kafka1:19092,PLAINTEXT://kafka2:19093,PLAINTEXT://kafka3:19094'
+#      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
   app:
     image: openjdk:17-jdk-slim
     container_name: ${SPRING_APPLICATION_NAME}
@@ -72,6 +86,7 @@ services:
       - kafka1
       - kafka-ui
       - redis
+#      - kafka-schema-registry
 
   db:
     image: postgres:15.3

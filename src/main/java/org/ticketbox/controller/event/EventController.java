@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.ticketbox.database.model.Event;
 import org.ticketbox.service.event.EventService;
 import org.ticketbox.shared.base.BaseResponse;
+import org.ticketbox.shared.dto.event.CreateEventDto;
 
 import java.util.List;
 
@@ -30,13 +31,13 @@ public class EventController {
     }
 
     @PostMapping
-    public BaseResponse<Event> createEvent(@RequestBody Event event) {
-        return new BaseResponse<Event>(eventService.createEvent(event));
+    public BaseResponse<Event> createEvent(@RequestBody CreateEventDto eventDto) {
+        return new BaseResponse<Event>(eventService.createEvent(eventDto));
     }
 
     @PutMapping("/{id}")
-    public BaseResponse<Event> editEvent(@PathVariable Integer id ,@RequestBody Event event) {
-        return new BaseResponse<Event>(eventService.editEvent(id, event));
+    public BaseResponse<Event> editEvent(@PathVariable Integer id, @RequestBody CreateEventDto eventDto) {
+        return new BaseResponse<Event>(eventService.editEvent(id, eventDto));
     }
 
     @DeleteMapping("/{id}")

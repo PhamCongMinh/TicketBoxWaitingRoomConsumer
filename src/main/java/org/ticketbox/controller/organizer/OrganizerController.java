@@ -3,12 +3,8 @@ package org.ticketbox.controller.organizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.ticketbox.database.model.Organizer;
-import org.ticketbox.database.model.TicketType;
 import org.ticketbox.service.organizer.OrganizerService;
-import org.ticketbox.service.ticket_type.TicketTypeService;
 import org.ticketbox.shared.base.BaseResponse;
-
-import java.util.List;
 
 @RestController()
 @RequestMapping("/organizers")
@@ -17,7 +13,7 @@ public class OrganizerController {
     private OrganizerService organizerService;
 
     @PostMapping
-    public BaseResponse<Organizer> createTicketType(@RequestBody Organizer organizer) {
+    public BaseResponse<Organizer> createOrganizer(@RequestBody Organizer organizer) {
         return new BaseResponse<Organizer>(organizerService.createOrganizer(organizer));
     }
 
@@ -25,6 +21,12 @@ public class OrganizerController {
     public BaseResponse<Organizer> getOrganizerById(@PathVariable Integer id) {
         return new BaseResponse<Organizer>(organizerService.getOrganizerById(id));
     }
+
+    @PutMapping("/{id}")
+    public BaseResponse<Organizer> editOrganizer(@PathVariable Integer id, @RequestBody Organizer organizer) {
+        return new BaseResponse<Organizer>(organizerService.editOrganizer(id, organizer));
+    }
+
 
     @DeleteMapping("/{id}")
     public void deleteTicketTypeById(@PathVariable Integer id) {

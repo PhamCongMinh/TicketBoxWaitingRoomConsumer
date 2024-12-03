@@ -13,7 +13,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="organizers")
+@Table(name = "organizers")
 public class Organizer extends BaseModel {
     private String name;
 
@@ -21,6 +21,6 @@ public class Organizer extends BaseModel {
 
     private String backgroundImageUrl;
 
-    @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "organizer", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Event> events;
 }

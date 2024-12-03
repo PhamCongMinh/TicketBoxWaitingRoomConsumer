@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableCaching
 public class TicketBoxApplication {
 
+    public static void main(String[] args) {
+        SpringApplication.run(TicketBoxApplication.class, args);
+    }
+
     @RequestMapping("/")
     String home() {
         return "OKE";
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(TicketBoxApplication.class, args);
     }
 
 }
