@@ -1,5 +1,7 @@
 package org.ticketbox.database.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +23,8 @@ public class TicketType extends BaseModel {
 
     private String amount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "event_id")
+    @JsonIgnoreProperties("ticketTypes")
     private Event event;
 }

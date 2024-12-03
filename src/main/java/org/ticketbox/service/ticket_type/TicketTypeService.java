@@ -44,8 +44,8 @@ public class TicketTypeService {
 
         String topic = "create_ticket_type";
         TicketTypeSummary ticketTypeSummary = TicketTypeSummary.builder().ticketTypeId(newTicketType.getId()).eventId(event.getId()).amount(newTicketType.getAmount()).build();
-        kafkaProducerService.sendMessageForTicketType(topic, ticketTypeSummary);
-        log.info("Send message create Ticket Type to topic: " + topic);
+        kafkaProducerService.sendMessage(topic, ticketTypeSummary);
+        log.info("Send message create Ticket Type to topic: " + topic + "And the message data: " + ticketTypeSummary);
 
         return ticketType;
     }
@@ -63,7 +63,14 @@ public class TicketTypeService {
         ticketType.setAmount(ticketTypeDto.getAmount());
         ticketType.setEvent(event);
 
-        return ticketTypeRepository.save(ticketType);
+        TicketType editedTicketType = ticketTypeRepository.save(ticketType);
+
+        String topic = "edit_ticket_type";
+        TicketTypeSummary ticketTypeSummary = TicketTypeSummary.builder().ticketTypeId(editedTicketType.getId()).eventId(event.getId()).amount(editedTicketType.getAmount()).build();
+        kafkaProducerService.sendMessage(topic, ticketTypeSummary);
+        log.info("Send message edit Ticket Type to topic: " + topic + "And the message data: " + ticketTypeSummary);
+
+        return editedTicketType;
     }
 
     public Optional<TicketType> getTicketTypeById(Integer id) {
@@ -72,9 +79,8 @@ public class TicketTypeService {
 
     public void deleteTicketTypeById(Integer id) {
         ticketTypeRepository.deleteById(id);
-//        String topic = "delete_ticket_type";
-//        TicketTypeSummary ticketTypeSummary =  TicketTypeSummary.builder().id(1).eventId(1).amount("2").build();
-//        kafkaProducerService.sendMessageForTicketType(topic, ticketTypeSummary);
-//        log.info("Send message create Ticket Type to topic: " + topic);
+        String topic = "delete_ticket_type";
+        kafkaProducerService.sendMessage(topic, id);
+        log.info("Send message delete Ticket Type to topic: " + topic + "And the message data: " + id);
     }
 }
