@@ -11,6 +11,8 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_SERVERS: zoo1:2888:3888
+    networks:
+      - ticket-box
 
   kafka1:
     image: confluentinc/cp-kafka:7.3.2
@@ -36,6 +38,8 @@ services:
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
     depends_on:
       - zoo1
+    networks:
+      - ticket-box
 
   kafka-ui:
     container_name: kafka-ui
@@ -53,6 +57,8 @@ services:
     depends_on:
       - zoo1
       - kafka1
+    networks:
+      - ticket-box
 
 #  kafka-schema-registry:
 #    image: confluentinc/cp-schema-registry:7.3.2
@@ -87,6 +93,8 @@ services:
       - kafka-ui
       - redis
 #      - kafka-schema-registry
+    networks:
+      - ticket-box
 
   db:
     image: postgres:15.3
@@ -104,6 +112,8 @@ services:
       - zoo1
       - kafka1
       - kafka-ui
+    networks:
+      - ticket-box
 
   redis:
     image: redis:6.2-alpine
@@ -113,8 +123,13 @@ services:
     command: redis-server --save 20 1 --loglevel warning --port ${SPRING_REDIS_PORT}
     volumes:
       - redis_data:/data
+    networks:
+      - ticket-box
 
 volumes:
   db_data:
   redis_data:
+
+networks:
+  ticket-box:
 
