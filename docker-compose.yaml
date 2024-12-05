@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  waiting-room-service:
+  waiting-room-consumer:
     image: openjdk:17-jdk-slim
-    container_name: waiting-room-service
+    container_name: waiting-room-consumer
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     env_file:
@@ -13,41 +13,8 @@ services:
     restart: always
     working_dir: /app
     command: [ "java", "-jar", "${JAR_FILE}" ]
-    depends_on:
-      - waiting-room-db
-      - waiting-room-redis
     networks:
       - ticket-box
-
-  waiting-room-db:
-    image: postgres:15.3
-    container_name: waiting-room-db
-    environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${SPRING_DATASOURCE_USERNAME}
-      - POSTGRES_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-      - INIT
-    ports:
-      - "${DB_PORT}:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    networks:
-      - ticket-box
-
-  waiting-room-redis:
-    image: redis:6.2-alpine
-    container_name: waiting-room-redis
-    ports:
-      - '${SPRING_REDIS_PORT}:${SPRING_REDIS_PORT}'
-    command: redis-server --save 20 1 --loglevel warning --port ${SPRING_REDIS_PORT}
-    volumes:
-      - redis_data:/data
-    networks:
-      - ticket-box
-
-volumes:
-  db_data:
-  redis_data:
 
 networks:
   ticket-box:

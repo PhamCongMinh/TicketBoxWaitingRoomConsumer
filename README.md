@@ -1,4 +1,4 @@
-# TicketBox Event Service
+# TicketBox Waiting Room Consumer
 
 ## General information <hr>
 
